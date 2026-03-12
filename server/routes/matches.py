@@ -1,58 +1,45 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from database import SessionLocal
+from database import SessionLocal, get_db
 from models import Match, MatchPlayer
 from datetime import datetime
+import schemas
 
 router = APIRouter()
 
-# Dependency DB
-def get_db():
-    db = SessionLocal()
+@router.post("/create", response_model=schemas.MatchResponse)
+def create_match(match_data: schemas.MatchCreate, db: Session = Depends(get_db)):
     try:
-        yield db
-    finally:
-        db.close()
-
-# Creează meci
-@router.post("/create")
-def create_match(title: str, location: str, match_time: str, created_by: int, db: Session = Depends(get_db)):
-    try:
-        dt = datetime.fromisoformat(match_time)
-    except:
+        dt = datetime.fromisoformat(match_data.match_time)
+    except ValueError:
         raise HTTPException(status_code=400, detail="Format timp invalid, folosește ISO format")
     
-    new_match = Match(title=title, location=location, match_time=dt, created_by=created_by)
+    new_match = Match(
+        title=match_data.title, 
+        location=match_data.location, 
+        match_time=dt, 
+        created_by=match_data.created_by
+    )
     db.add(new_match)
     db.commit()
     db.refresh(new_match)
-    return {"id": new_match.id, "title": new_match.title, "location": new_match.location, "match_time": new_match.match_time.isoformat()}
+    return new_match
 
-# Listează toate meciurile
-@router.get("/")
+@router.get("/", response_model=list[schemas.MatchResponse])
 def list_matches(db: Session = Depends(get_db)):
-    matches = db.query(Match).all()
-    return [
-        {
-            "id": m.id,
-            "title": m.title,
-            "location": m.location,
-            "match_time": m.match_time.isoformat(),
-            "created_by": m.created_by
-        } for m in matches
-    ]
+    return db.query(Match).all()
 
-# Join la meci
 @router.post("/join")
-def join_match(user_id: int, match_id: int, db: Session = Depends(get_db)):
-    
-    exists = db.query(MatchPlayer).filter((MatchPlayer.user_id==user_id) 
-                                          & (MatchPlayer.match_id==match_id)).first()
+def join_match(join_data: schemas.MatchJoin, db: Session = Depends(get_db)):
+    exists = db.query(MatchPlayer).filter(
+        (MatchPlayer.user_id == join_data.user_id) & 
+        (MatchPlayer.match_id == join_data.match_id)
+    ).first()
 
     if exists:
         raise HTTPException(status_code=400, detail="Userul a mai intrat deja în meci")
     
-    mp = MatchPlayer(user_id=user_id, match_id=match_id)
+    mp = MatchPlayer(user_id=join_data.user_id, match_id=join_data.match_id)
     db.add(mp)
     db.commit()
     return {"message": "Userul s-a alăturat meciului"}
