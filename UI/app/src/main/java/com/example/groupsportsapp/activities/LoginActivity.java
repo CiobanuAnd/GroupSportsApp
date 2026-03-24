@@ -1,4 +1,4 @@
-package com.example.groupsportsapp;
+package com.example.groupsportsapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 // Acestea sunt importurile noi pentru Retrofit
+import com.example.groupsportsapp.models.AuthResponse;
+import com.example.groupsportsapp.models.LoginRequest;
+import com.example.groupsportsapp.R;
+import com.example.groupsportsapp.network.RetrofitClient;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,6 +63,11 @@ public class LoginActivity extends AppCompatActivity {
 
                             AuthResponse authResponse = response.body();
                             Toast.makeText(LoginActivity.this, "Salut, " + authResponse.getUsername() + "!", Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("USER_ID", authResponse.getId());
+                            startActivity(intent);
+                            finish();
 
                         } else {
                             Toast.makeText(LoginActivity.this, "Email sau parolă incorectă!", Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.example.groupsportsapp;
+package com.example.groupsportsapp.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 // Importurile Retrofit
+import com.example.groupsportsapp.models.AuthResponse;
+import com.example.groupsportsapp.R;
+import com.example.groupsportsapp.models.RegisterRequest;
+import com.example.groupsportsapp.network.RetrofitClient;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etRegisterPassword);
         btnRegister = findViewById(R.id.btnRegister);
         tvGoToLogin = findViewById(R.id.tvGoToLogin);
-        
+
         tvGoToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

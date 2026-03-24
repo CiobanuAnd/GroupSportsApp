@@ -1,4 +1,4 @@
-package com.example.groupsportsapp;
+package com.example.groupsportsapp.models;
 
 public class AuthResponse {
     private int id;
