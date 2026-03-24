@@ -1,6 +1,6 @@
-Name: Ciobanu Andrei
-Student ID: 1284
-Course: Android Development
+Name: Ciobanu Andrei  
+Student ID: 1284  
+Course: Android Development  
 
 ## Name of the project:  GroupSports
 
@@ -9,11 +9,11 @@ You can plan where to meet, when to meet and choose a title.
 
 ## Features:
 -Login/Register page, the password is hashed.
--Create a match (only one match per user)
--Configure the match (choose the time, place and the name)
--Delete the match (only the user that created the match and the admin can delete a match)
--Edit a match (the previous details remain to be easier to edit)
--View what players joined the match
+-Create a match (only one match per user).  
+-Configure the match (choose the time, place and the name).  
+-Delete the match (only the user that created the match and the admin can delete a match).  
+-Edit a match (the previous details remain to be easier to edit).  
+-View what players joined the match.  
 
 ## Screenshots:
 <img width="248" height="922" alt="Screenshot 2026-03-24 144359" src="https://github.com/user-attachments/assets/d3a92c17-16ec-46ce-ad62-36dab109ccef" />
@@ -25,9 +25,9 @@ You can plan where to meet, when to meet and choose a title.
 
 
 ## Technologies used:
-Frontend: Android SDK, Java, XML. Libraries: Retrofit, RecyclerView.
-Backend: Python, FastAPI, SQLAlchemy, Uvicorn.
-Database: PostgreSQL (hosted on cloud on Neon).
+Frontend: Android SDK, Java, XML. Libraries: Retrofit, RecyclerView.  
+Backend: Python, FastAPI, SQLAlchemy, Uvicorn.  
+Database: PostgreSQL (hosted on cloud on Neon).  
 
 ## How to Run
 1. Clone repository
