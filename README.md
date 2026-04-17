@@ -1,19 +1,20 @@
-Name: Ciobanu Andrei  
-Student ID: 1284  
-Course: Android Development  
+## Description
+Backend application for organizing sports matches. Users can create matches, join games, and manage participants.
 
-## Name of the project:  GroupSports
+## Tech Stack
+- FastAPI
+- PostgreSQL
 
-The app provides the possibility to create, read, update, delete (CRUD) a team and it is visible to other users which can join the team.
-You can plan where to meet, when to meet and choose a title.
+## Features
+- Create match
+- Join match
+- View players
+- Authentication
 
-## Features:
--Login/Register page, the password is hashed.
--Create a match (only one match per user).  
--Configure the match (choose the time, place and the name).  
--Delete the match (only the user that created the match and the admin can delete a match).  
--Edit a match (the previous details remain to be easier to edit).  
--View what players joined the match.  
+## Architecture
+- routers/
+- models/
+- database/
 
 ## Screenshots:
 <img width="248" height="922" alt="Screenshot 2026-03-24 144359" src="https://github.com/user-attachments/assets/d3a92c17-16ec-46ce-ad62-36dab109ccef" />
@@ -24,12 +25,5 @@ You can plan where to meet, when to meet and choose a title.
 <img width="248" height="925" alt="Screenshot 2026-03-24 144607" src="https://github.com/user-attachments/assets/57041cb1-0c97-4a5e-96e7-a11f6fa37029" />
 
 
-## Technologies used:
-Frontend: Android SDK, Java, XML. Libraries: Retrofit, RecyclerView.  
-Backend: Python, FastAPI, SQLAlchemy, Uvicorn.  
-Database: PostgreSQL (hosted on cloud on Neon).  
-
-## How to Run
-1. Clone repository
-2. Open with Android Studio
-3. Run on emulator or device
+## How to run
+uvicorn main:app --reload 
